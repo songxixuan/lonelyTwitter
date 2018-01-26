@@ -46,7 +46,7 @@ public class LonelyTwitterActivity extends Activity {
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
-
+        Button clear = (Button) findViewById(R.id.clear);
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -59,11 +59,20 @@ public class LonelyTwitterActivity extends Activity {
 				adapter .notifyDataSetChanged();
 
 				saveInFile();
-				finish();
 
 			}
 		});
+		clear.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                tweetList.clear();
+                //from https://stackoverflow.com/questions/14494851/android-clear-the-listview-data-on-button-click
+                adapter.notifyDataSetChanged();
+
+                saveInFile();
+            }
+        });
 	}
+
 
 	@Override
 	protected void onStart() {
