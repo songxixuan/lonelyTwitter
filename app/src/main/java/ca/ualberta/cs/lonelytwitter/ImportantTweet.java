@@ -9,6 +9,14 @@ import java.util.Date;
 
 public class ImportantTweet extends Tweet {
 
+    /**
+     *  Represents inportant tweet
+     *
+     *   @author xixuan
+     *
+     *   @version 1.0
+     */
+
     public ImportantTweet(String message) {
         super(message);
     }
