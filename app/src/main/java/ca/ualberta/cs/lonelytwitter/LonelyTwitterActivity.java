@@ -10,7 +10,6 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -64,7 +63,6 @@ public class LonelyTwitterActivity extends Activity {
 
 			public void onClick(View v) {
 				setResult(RESULT_OK);
-
 				tweetList.clear();
 				adapter.notifyDataSetChanged();
 				saveInFile();
@@ -75,7 +73,10 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setOnItemClickListener((new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				Intent intent = new Intent(activity, EditTweetActivity.class);
+				String message = tweetList.get(i).getMessage();
+				intent.putExtra("tweetMessage",message);
 				startActivity(intent);
+
 			}
 		}));
 	}
