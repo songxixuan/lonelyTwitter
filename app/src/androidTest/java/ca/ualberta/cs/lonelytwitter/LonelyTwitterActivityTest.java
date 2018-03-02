@@ -6,7 +6,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.robotium.solo.Solo;
-
+import com.robotium.solo.Solo;
 import junit.framework.TestCase;
 
 public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 {
@@ -58,6 +58,21 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
         solo.assertCurrentActivity("Wrong Activity", LonelyTwitterActivity.class);
 
 
+    }
+
+    public void testDataPass(){
+        LonelyTwitterActivity activity = (LonelyTwitterActivity)solo.getCurrentActivity();
+        solo.assertCurrentActivity("Wrong Activity",LonelyTwitterActivity.class);
+        solo.enterText((EditText)solo.getView(R.id.body),"Test Pass Data");
+        solo.clickOnButton("Save");
+        final ListView oldTweetList = activity.getOldTweetsList();
+        Tweet tweet = (Tweet)oldTweetList.getItemAtPosition(0);
+        String message = tweet.getMessage();
+        solo.clickInList(0);
+        solo.assertCurrentActivity("Wrong Activity",EditTweetActivity.class);
+        assertTrue(solo.waitForText(message,1,3000));
+        solo.goBack();
+        solo.assertCurrentActivity("Wrong Activity",LonelyTwitterActivity.class);
     }
 
     @Override
